@@ -20,7 +20,8 @@ shotgun = Weapon("Remington 700", 8, 3, 120)
 bobsemple = Weapon("M1A2 Abrams", 29, 20, 3500)
 gau21int = Weapon("M61A1 Vulcan", 964, 700, 560)
 
-weaponlist = ["Rubber Band", "Revolver", "Shotgun", "Bob Semple", "Internal GAU-21"]
+weaponlist = ["rubberband", "revolver", "shotgun", "bobsemple", "gau21int"]
+#List used in selection of weapon at start of game.
 
 class Player:
     def __init__(self,
@@ -55,15 +56,17 @@ def main():
         print("Hello. Welcome to Russian Roulette. Where your bravery will be put to the test.")
         time.sleep(1)
         print("Would you like to continue?")
-        if input("Y/N: \n").strip().upper() in sey:
-             print("What weapon would you like to use?")
-             if input("What weapon would you like to use?") in weaponlist():
+        res = input("Y/N: \n").strip().upper()
+        if res in sey:
+             wchoc = input("What weapon would you like to use?:") 
+             if wchoc in weaponlist():
                 print("You have selected: \n", weapon.name)
-         elif input("Y/N: \n").strip().upper() in han:
-             print("GET OUT!\n")
-             s = 1
-             quit
-                   
+        elif res in han:
+            print("\n Then..")
+            time.sleep(1)
+            print("GET OUT! \n")
+            s = 1
+            quit           
         else:
              print("Please return a valid answer between Yes or No.")
 
