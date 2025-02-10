@@ -59,10 +59,10 @@ def main():
              print("What weapon would you like to use?")
              if input("What weapon would you like to use?") in weaponlist():
                 print("You have selected: \n", weapon.name)
-             elif input("Y/N: \n").strip().upper() in han:
-                 print("GET OUT!\n")
-                 s = 1
-                 close
+         elif input("Y/N: \n").strip().upper() in han:
+             print("GET OUT!\n")
+             s = 1
+             quit
                    
         else:
              print("Please return a valid answer between Yes or No.")
@@ -81,11 +81,10 @@ def trigger():
                  print(player.name + " Has gone kablooey.\n ")
                  if input("Would you like to play again?\n Y/N") == "Y":
                      main()
-                     elif input() == "N":
-                         break
-                         else:
-                            print("Please reutrn a valid answer. \n")
-
+                 elif input() == "N":
+                     quit
+                 else:
+                     print("Please reutrn a valid answer. \n")
         if hitc > weapon.liveR:
             print("Nothing happened")
             sh += 1
