@@ -4,23 +4,25 @@ import time
 # Blueprint for different weapons.
 class Weapon:
     def __init__(self,
-        type = "Revolver", 
+        type = "1886 New Model Army", 
+        name = "revolver",
         shells = 6,
         liveR = 1,
         damage = 80
     ):
         self.type = type
+        self.name = name
         self.shells = shells
         self.liveR = liveR
         self.damage = damage
 
-rubberband = Weapon("Rubber Band Launcher", 30, 2, 2 )
+rubberband = Weapon("Rubber Band Launcher", "rubberband", 30, 2, 2 )
 revolver = Weapon("1887 New Model Army", 6, 1, 80)
 shotgun = Weapon("Remington 700", 8, 3, 120)
 bobsemple = Weapon("M1A2 Abrams", 29, 20, 3500)
 gau21int = Weapon("M61A1 Vulcan", 964, 700, 560)
 
-weaponlist = ["rubberband", "revolver", "shotgun", "bobsemple", "gau21int"]
+weaponlist = ["rubberband" = rubberband, "revolver" = revolver, "shotgun" = shotgun, "bobsemple" = bobsemple, "gau21int" = gau21int]
 #List used in selection of weapon at start of game.
 
 class Player:
