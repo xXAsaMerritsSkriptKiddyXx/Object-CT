@@ -17,13 +17,28 @@ class Weapon:
         self.damage = damage
 
 rubberband = Weapon("Rubber Band Launcher", "rubberband", 30, 2, 2 )
-revolver = Weapon("1887 New Model Army", 6, 1, 80)
-shotgun = Weapon("Remington 700", 8, 3, 120)
-bobsemple = Weapon("M1A2 Abrams", 29, 20, 3500)
-gau21int = Weapon("M61A1 Vulcan", 964, 700, 560)
+revolver = Weapon("1887 New Model Army","revolver", 6, 1, 80)
+shotgun = Weapon("Remington 700","shotgun", 8, 3, 120)
+bobsemple = Weapon("M1A2 Abrams","bobsemple", 29, 20, 3500)
+gau21int = Weapon("M61A1 Vulcan","gau21int", 964, 700, 560)
 
-weaponlist = ["rubberband" = rubberband, "revolver" = revolver, "shotgun" = shotgun, "bobsemple" = bobsemple, "gau21int" = gau21int]
-#List used in selection of weapon at start of game.
+options = {
+    "rubberband" : rubberband,
+    "revolver" : revolver,
+    "shotgun" : shotgun,
+    "bobsemple": bobsemple,
+    "gau21int" : gau21int
+}
+# Dictionary for Weapon Options
+
+weapons = []
+weapons.append(rubberband)
+weapons.append(revolver)
+weapons.append(shotgun)
+weapons.append(bobsemple)
+weapons.append(gau21int)
+# List for Weapon Options.
+# Combo of List and Dictionary gives optoins on which to refer to. 
 
 class Player:
     def __init__(self,
@@ -60,9 +75,26 @@ def main():
         print("Would you like to continue?")
         res = input("Y/N: \n").strip().upper()
         if res in sey:
-             wchoc = input("What weapon would you like to use?:") 
-             if wchoc in weaponlist():
-                print("You have selected: \n", weapon.name)
+             run = True
+             while(run):
+                print("Please pick a weapon: \n")
+                # for w, weapon in options.items():
+                #     print(w)
+                # userin = input().strip().lower()
+                for i, weapon in enumerate(weapons):
+                    print(i+1, weapon.name)
+
+                userin = input().strip().lower()
+
+                if userin.isnumeric():
+                    print("\n You have chosen:" , weapons[int(userin)-1].type)
+                    run = False
+                    
+
+
+                # if userin in options.keys():
+                #     print(options[userin].type)
+                #     break
         elif res in han:
             print("\n Then..")
             time.sleep(1)
@@ -94,4 +126,6 @@ def trigger():
             print("Nothing happened")
             sh += 1
 
-main() 
+
+if __name__ == "__main__":
+    main() 
