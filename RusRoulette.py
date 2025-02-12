@@ -86,16 +86,11 @@ def main():
 
                 userin = input().strip().lower()
                  
-                if userin.isnumeric():
-                    try:
-                     print("\n You have chosen:" , weapons[int(userin)-1].type)
+                if userin.isnumeric() and int(userin) <= len(weapons):
+                     print("\n You have chosen:" , weapons[int(userin)-1].type, "\n") 
                      run = False
-                    except:
-                         if userin.isnumeric() > i:
-                             print("Please return a valid number!")
-                             
-                    
-
+                else:
+                 print("Please return an integer from the allowed list!")
 
                 # if userin in options.keys():
                 #     print(options[userin].type)
@@ -104,6 +99,7 @@ def main():
             print("\n Then..")
             time.sleep(1)
             print("GET OUT! \n")
+            time.sleep(1)
             s = 1
             quit           
         else:
@@ -116,7 +112,7 @@ def trigger():
         hitc = random.randint(1, weapon.shells)
         if hitc <= weapon.liveR:
              print("The " , weapon.type, "goes off", time.sleep(1) 
-             + "\nand " + player.name + " takes " + weapon.damage + " damage!")
+             + "\nAnd " + player.name + " takes " + weapon.damage + " damage!")
              player.health = (player.health - weapon.damage)
              sh += 1
              if player.health <= 0:
