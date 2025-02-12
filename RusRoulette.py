@@ -85,10 +85,15 @@ def main():
                     print(i+1, weapon.name)
 
                 userin = input().strip().lower()
-
+                 
                 if userin.isnumeric():
-                    print("\n You have chosen:" , weapons[int(userin)-1].type)
-                    run = False
+                    try:
+                     print("\n You have chosen:" , weapons[int(userin)-1].type)
+                     run = False
+                    except:
+                         if userin.isnumeric() > i:
+                             print("Please return a valid number!")
+                             
                     
 
 
