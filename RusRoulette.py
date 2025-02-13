@@ -17,7 +17,7 @@ class Weapon:
         self.damage = damage
 
 rubberband = Weapon("Rubber Band Launcher", "rubberband", 30, 2, 2 )
-revolver = Weapon("1887 New Model Army","revolver", 6, 1, 80)
+revolver = Weapon("1887 New Model Army","revolver", 6, 1, 100)
 shotgun = Weapon("Remington 700","shotgun", 8, 3, 120)
 bobsemple = Weapon("M1A2 Abrams","bobsemple", 29, 20, 3500)
 gau21int = Weapon("M61A1 Vulcan","gau21int", 964, 700, 560)
@@ -45,7 +45,7 @@ selwep = []
 class Player:
     def __init__(self,
         name = "You",
-        health = 200,
+        health = 100,
         x = 0
 ):
         self.name = name
@@ -57,7 +57,7 @@ user = Player()
 class Bot:
     def __init__(self,
         bname = "Evan Michael Merritt",
-        bhealth = 200,
+        bhealth = 100,
         y = 1,
         qchance = 3
 ):
