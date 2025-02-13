@@ -103,8 +103,7 @@ def main():
                         trigger()
                      run = False
                 else:
-                 print("Please return an integer from the allowed list!")
-
+                 print("Please return an integer from the allowed list!")s
                 # if userin in options.keys():
                 #     print(options[userin].type)
                 #     break
@@ -117,7 +116,7 @@ def main():
             quit           
         else:
              print("Please return a valid answer between Yes or No.")
-             main()
+             #main()
 
 
 def trigger():
@@ -145,12 +144,11 @@ def trigger():
                 print("Nothing happened")
                 sh += 1
         #Only runs if you decide not to fire
-        if firc in han: 
+        if firc in han:
          print("\n Then..")
          time.sleep(1)
          print("GET OUT! \n")
          time.sleep(1)
-         s = 1
          quit 
         else:
             print("Please return a valid response: \n")   
