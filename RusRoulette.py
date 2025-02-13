@@ -126,8 +126,9 @@ def trigger():
        if firc in sey:
             hitc = random.randint(1, selwep.shells)
             if hitc <= selwep.liveR:
-                print("The " , selwep.type, "goes off", time.sleep(1) 
-                + "\nAnd " + user.name + " takes " + selwep.damage + " damage!")
+                print("The " , selwep.type, "goes off") 
+                time.sleep(1) 
+                print("And " + user.name + " takes " + selwep.damage + " damage!")
                 user.health = (user.health - selwep.damage)
                 sh += 1
                 #Only runs at end of game
