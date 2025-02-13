@@ -128,7 +128,7 @@ def trigger():
             if hitc <= selwep.liveR:
                 print("The " , selwep.type, "goes off") 
                 time.sleep(1) 
-                print("And " + user.name + " takes " + selwep.damage + " damage!")
+                print("And " + user.name + " takes " + str(selwep.damage) + " damage!")
                 user.health = (user.health - selwep.damage)
                 sh += 1
                 #Only runs at end of game
