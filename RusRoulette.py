@@ -40,6 +40,8 @@ weapons.append(gau21int)
 # List for Weapon Options.
 # Combo of List and Dictionary gives optoins on which to refer to. 
 
+selwep = []
+
 class Player:
     def __init__(self,
         name = "You",
@@ -50,30 +52,33 @@ class Player:
         self.health = health
         self.x = x
 
+user = Player()
+
 class Bot:
     def __init__(self,
         bname = "Evan Michael Merritt",
         bhealth = 200,
         y = 1,
-        qchance = [3,10]
+        qchance = 3
 ):
         self.bname = bname
         self.bhealth = bhealth
         self.y = y
         self.qchance = qchance
 # x and y are used to iterate between whose turn it is.
+comp = Bot()
 
-
-sey = ["YES", "Y"]
-han = ["NO", "N"]
+sey = ["yes", "y"]
+han = ["n", "n"]
 
 def main():
+    global selwep
     s = 1
     if s == 1:
         print("Hello. Welcome to Russian Roulette. Where your bravery will be put to the test.")
         time.sleep(1)
         print("Would you like to continue?")
-        res = input("Y/N: \n").strip().upper()
+        res = input("Y/N: \n").strip().lower()
         if res in sey:
              run = True
              while(run):
@@ -85,9 +90,17 @@ def main():
                     print(i+1, weapon.name)
 
                 userin = input().strip().lower()
-                 
+              
+
                 if userin.isnumeric() and int(userin) <= len(weapons):
-                     print("\n You have chosen:" , weapons[int(userin)-1].type, "\n") 
+                     selwep = weapons[int(userin)-1]
+                     print("\n You have chosen:" , selwep.type, "\n") 
+                     if input("Would you like to go first? \n") in sey:
+                        user.x = 1
+                        trigger()
+                     else:
+                        comp.y = 1
+                        trigger()
                      run = False
                 else:
                  print("Please return an integer from the allowed list!")
@@ -104,28 +117,53 @@ def main():
             quit           
         else:
              print("Please return a valid answer between Yes or No.")
+             main()
 
 
 def trigger():
     sh = 0
-    if sh < weapon.shells:
-        hitc = random.randint(1, weapon.shells)
-        if hitc <= weapon.liveR:
-             print("The " , weapon.type, "goes off", time.sleep(1) 
-             + "\nAnd " + player.name + " takes " + weapon.damage + " damage!")
-             player.health = (player.health - weapon.damage)
-             sh += 1
-             if player.health <= 0:
-                 print(player.name + " Has gone kablooey.\n ")
-                 if input("Would you like to play again?\n Y/N") == "Y":
-                     main()
-                 elif input() == "N":
-                     quit
-                 else:
-                     print("Please reutrn a valid answer. \n")
-        if hitc > weapon.liveR:
-            print("Nothing happened")
-            sh += 1
+    while sh <= selwep.shells:
+       firc = input("Fire? \n Y/N:")
+       if firc in sey:
+            hitc = random.randint(1, selwep.shells)
+            if hitc <= selwep.liveR:
+                print("The " , selwep.type, "goes off", time.sleep(1) 
+                + "\nAnd " + user.name + " takes " + selwep.damage + " damage!")
+                user.health = (user.health - selwep.damage)
+                sh += 1
+                #Only runs at end of game
+                if user.health <= 0:
+                    print(user.name + " Has gone kablooey.\n ")
+                    if input("Would you like to play again?\n Y/N") == "Y":
+                        main()
+                    elif input() == "N":
+                        quit
+                    else:
+                        print("Please reutrn a valid answer. \n")
+                
+            if hitc > selwep.liveR:
+                print("Nothing happened")
+                sh += 1
+        #Only runs if you decide not to fire
+        if firc in han: 
+         print("\n Then..")
+         time.sleep(1)
+         print("GET OUT! \n")
+         time.sleep(1)
+         s = 1
+         quit 
+        else:
+            print("Please return a valid response: \n")   
+
+    #Runs if all shells go off and no one wins
+    if sh > selwep.shells:
+        if input("Would you like to play again?\n Y/N") == "Y":
+         main()
+        elif input() == "N":
+         quit
+        else:
+         print("Please reutrn a valid answer. \n")
+
 
 
 if __name__ == "__main__":
