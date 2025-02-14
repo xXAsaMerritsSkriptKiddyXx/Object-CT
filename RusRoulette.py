@@ -1,5 +1,12 @@
 import random,sys, time
 
+def Funnyquit():
+ print("\n Then..")
+ time.sleep(1)
+ print("GET OUT! \n")
+ time.sleep(1)
+ sys.exit()      
+
 # Blueprint for different weapons.
 class Weapon:
     def __init__(self,
@@ -108,12 +115,7 @@ def main():
                 #     print(options[userin].type)
                 #     break
         elif res in han:
-            print("\n Then..")
-            time.sleep(1)
-            print("GET OUT! \n")
-            time.sleep(1)
-            s = 1
-            sys.exit()
+            Funnyquit()
         else:
              print("Please return a valid answer between Yes or No.")
              #main()
@@ -141,11 +143,7 @@ def trigger():
                         if input("Would you like to play again?\n Y/N") in sey:
                             main()
                         elif input() in han:
-                            print("\n Then..")
-                            time.sleep(1)
-                            print("GET OUT! \n")
-                            time.sleep(1)
-                            sys.exit()
+                         Funnyquit()
                         else:
                             print("Please reutrn a valid answer. \n")
                 
@@ -154,11 +152,7 @@ def trigger():
                     sh += 1
             #Only runs if you decide not to fire
             if firc in han:
-             print("\n Then..")
-             time.sleep(1)
-             print("GET OUT! \n")
-             time.sleep(1)
-             sys.exit() 
+             Funnyquit()
             else:
              print("Please return a valid response: \n")   
         else:
@@ -184,12 +178,18 @@ def trigger():
                          #Only runs at end of game
                          if comp.bhealth <= 0:
                              print(comp.bname + " has gone kablooey.\n ")
+                             if input("Would you like to play again?\n Y/N") in sey:
+                                 main()
+                             elif input() in han:
+                                 Funnyquit()                         
+                             else:
+                                 print("Please reutrn a valid answer. \n")
     #Runs if all shells go off and no one wins
     if sh > selwep.shells:
         if input("Would you like to play again?\n Y/N") in sey:
          main()
         elif input() in han:
-         sys.exit()
+         Funnyquit()
         else:
          print("Please reutrn a valid answer. \n")
 
