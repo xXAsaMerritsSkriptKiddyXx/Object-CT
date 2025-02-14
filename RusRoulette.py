@@ -1,4 +1,4 @@
-import random,sys, time
+import random, sys, time
 
 def Funnyquit():
  print("\n Then..")
@@ -53,7 +53,7 @@ class Player:
     def __init__(self,
         name = "You",
         health = 100,
-        x = 0
+        x = True
 ):
         self.name = name
         self.health = health
@@ -65,7 +65,7 @@ class Bot:
     def __init__(self,
         bname = "Evan Michael Merritt",
         bhealth = 100,
-        y = 1,
+        y = False,
         qchance = 3
 ):
         self.bname = bname
@@ -103,12 +103,12 @@ def main():
                      selwep = weapons[int(userin)-1]
                      print("\n You have chosen:" , selwep.type, "\n") 
                      if input("Would you like to go first? \n") in sey:
-                        user.x = 1
-                        comp.y = 0
+                        user.x = True
+                        comp.y = False
                         trigger()
                      else:
-                        comp.y = 1
-                        user.x = 0
+                        comp.y = True
+                        user.x = False
                         trigger()
                      run = False
                 else:
@@ -127,7 +127,7 @@ def trigger():
     global hitc
     sh = 0
     while sh <= selwep.shells:
-        if user.x == 1 and comp.y == 0:
+        if user.x == True and comp.y == False:
             firc = input("Fire? \n Y/N:")
             if firc in sey:
                 hitc = random.randint(0, selwep.shells)
@@ -137,8 +137,8 @@ def trigger():
                     print(user.name + " take " + str(selwep.damage) + " damage!")
                     user.health = (user.health - selwep.damage)
                     sh += 1
-                    user.x -= 1
-                    comp.y += 1
+                    user.x = False
+                    comp.y = True 
                     #Only runs at end of game
                     if user.health <= 0:
                         print(user.name + " have gone kablooey.\n ")
@@ -160,7 +160,7 @@ def trigger():
              print("Please return a valid response: \n")   
         else:
             #Bot coding
-            if comp.y == 1 and user.x == 0:
+            if comp.y == True and user.x == False:
                  quitp = random.randint(0,20)
                  if quitp <= comp.qchance:
                      print("Your opponent forefits! \n")
@@ -169,7 +169,7 @@ def trigger():
                          quit
                          main()
                      if input() in han:
-                         sys.exit()
+                         Funnyquit()
                  else:
                      if hitc <= selwep.liveR:
                          print("The " , selwep.type, "goes off") 
@@ -177,8 +177,8 @@ def trigger():
                          print(comp.bname + " takes " + str(selwep.damage) + " damage!")
                          comp.bhealth = (comp.bhealth - selwep.damage)
                          sh += 1
-                         user.x += 1 
-                         comp.y -= 1
+                         user.x = True
+                         comp.y = False
                          #Only runs at end of game
                          if comp.bhealth <= 0:
                              print(comp.bname + " has gone kablooey.\n ")
