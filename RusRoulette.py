@@ -1,5 +1,4 @@
-import random 
-import time
+import random,sys, time
 
 # Blueprint for different weapons.
 class Weapon:
@@ -41,6 +40,7 @@ weapons.append(gau21int)
 # Combo of List and Dictionary gives optoins on which to refer to. 
 
 selwep = []
+hitc = 0
 
 class Player:
     def __init__(self,
@@ -113,53 +113,83 @@ def main():
             print("GET OUT! \n")
             time.sleep(1)
             s = 1
-            quit           
+            sys.exit()
         else:
              print("Please return a valid answer between Yes or No.")
              #main()
 
 
 def trigger():
+    global hitc
     sh = 0
     while sh <= selwep.shells:
-       firc = input("Fire? \n Y/N:")
-       if firc in sey:
-            hitc = random.randint(1, selwep.shells)
-            if hitc <= selwep.liveR:
-                print("The " , selwep.type, "goes off") 
-                time.sleep(1) 
-                print("And " + user.name + " takes " + str(selwep.damage) + " damage!")
-                user.health = (user.health - selwep.damage)
-                sh += 1
-                #Only runs at end of game
-                if user.health <= 0:
-                    print(user.name + " Has gone kablooey.\n ")
-                    if input("Would you like to play again?\n Y/N") == "Y":
-                        main()
-                    elif input() == "N":
-                        quit
-                    else:
-                        print("Please reutrn a valid answer. \n")
+        if user.x == 1:
+            firc = input("Fire? \n Y/N:")
+            if firc in sey:
+                hitc = random.randint(1, selwep.shells)
+                if hitc <= selwep.liveR:
+                    print("The " , selwep.type, "goes off") 
+                    time.sleep(1) 
+                    print(user.name + " take " + str(selwep.damage) + " damage!")
+                    user.health = (user.health - selwep.damage)
+                    sh += 1
+                    user.x -= 1
+                    copm.y += 1
+                    #Only runs at end of game
+                    if user.health <= 0:
+                        print(user.name + " have gone kablooey.\n ")
+                        if input("Would you like to play again?\n Y/N") in sey:
+                            main()
+                        elif input() in han:
+                            print("\n Then..")
+                            time.sleep(1)
+                            print("GET OUT! \n")
+                            time.sleep(1)
+                            sys.exit()
+                        else:
+                            print("Please reutrn a valid answer. \n")
                 
-            if hitc > selwep.liveR:
-                print("Nothing happened")
-                sh += 1
-        #Only runs if you decide not to fire
-       if firc in han:
-         print("\n Then..")
-         time.sleep(1)
-         print("GET OUT! \n")
-         time.sleep(1)
-         quit 
-       else:
-            print("Please return a valid response: \n")   
-
+                if hitc > selwep.liveR:
+                    print("Nothing happened")
+                    sh += 1
+            #Only runs if you decide not to fire
+            if firc in han:
+             print("\n Then..")
+             time.sleep(1)
+             print("GET OUT! \n")
+             time.sleep(1)
+             sys.exit() 
+            else:
+             print("Please return a valid response: \n")   
+        else:
+            #Bot coding
+            if comp.y == 1:
+                 quitp = random.randint(0,20)
+                 if quitp <= comp.qchance:
+                     print("Your opponent forefits! \n")
+                     input("Would you like to play again?")
+                     if input() in sey:
+                         main()
+                     if input() in han:
+                         sys.exit()
+                 else:
+                     if hitc <= selwep.liveR:
+                         print("The " , selwep.type, "goes off") 
+                         time.sleep(1) 
+                         print(comp.bname + " takes " + str(selwep.damage) + " damage!")
+                         comp.bhealth = (comp.bhealth - selwep.damage)
+                         sh += 1
+                         user.x += 1 
+                         comp.y -= 1
+                         #Only runs at end of game
+                         if comp.bhealth <= 0:
+                             print(comp.bname + " has gone kablooey.\n ")
     #Runs if all shells go off and no one wins
     if sh > selwep.shells:
-        if input("Would you like to play again?\n Y/N") == "Y":
+        if input("Would you like to play again?\n Y/N") in sey:
          main()
-        elif input() == "N":
-         quit
+        elif input() in han:
+         sys.exit()
         else:
          print("Please reutrn a valid answer. \n")
 
