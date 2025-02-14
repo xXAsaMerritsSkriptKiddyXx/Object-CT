@@ -104,9 +104,11 @@ def main():
                      print("\n You have chosen:" , selwep.type, "\n") 
                      if input("Would you like to go first? \n") in sey:
                         user.x = 1
+                        comp.y = 0
                         trigger()
                      else:
                         comp.y = 1
+                        user.x = 0
                         trigger()
                      run = False
                 else:
@@ -125,10 +127,10 @@ def trigger():
     global hitc
     sh = 0
     while sh <= selwep.shells:
-        if user.x == 1:
+        if user.x == 1 and comp.y == 0:
             firc = input("Fire? \n Y/N:")
             if firc in sey:
-                hitc = random.randint(1, selwep.shells)
+                hitc = random.randint(0, selwep.shells)
                 if hitc <= selwep.liveR:
                     print("The " , selwep.type, "goes off") 
                     time.sleep(1) 
@@ -136,11 +138,12 @@ def trigger():
                     user.health = (user.health - selwep.damage)
                     sh += 1
                     user.x -= 1
-                    copm.y += 1
+                    comp.y += 1
                     #Only runs at end of game
                     if user.health <= 0:
                         print(user.name + " have gone kablooey.\n ")
                         if input("Would you like to play again?\n Y/N") in sey:
+                            quit
                             main()
                         elif input() in han:
                          Funnyquit()
@@ -157,12 +160,13 @@ def trigger():
              print("Please return a valid response: \n")   
         else:
             #Bot coding
-            if comp.y == 1:
+            if comp.y == 1 and user.x == 0:
                  quitp = random.randint(0,20)
                  if quitp <= comp.qchance:
                      print("Your opponent forefits! \n")
                      input("Would you like to play again?")
                      if input() in sey:
+                         quit
                          main()
                      if input() in han:
                          sys.exit()
@@ -179,6 +183,7 @@ def trigger():
                          if comp.bhealth <= 0:
                              print(comp.bname + " has gone kablooey.\n ")
                              if input("Would you like to play again?\n Y/N") in sey:
+                                 quit
                                  main()
                              elif input() in han:
                                  Funnyquit()                         
@@ -187,6 +192,7 @@ def trigger():
     #Runs if all shells go off and no one wins
     if sh > selwep.shells:
         if input("Would you like to play again?\n Y/N") in sey:
+         quit
          main()
         elif input() in han:
          Funnyquit()
