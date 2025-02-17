@@ -1,11 +1,12 @@
 import random, sys, time
 
-def Funnyquit():
- print("\n Then..")
- time.sleep(1)
- print("GET OUT! \n")
- time.sleep(1)
- sys.exit()      
+def funnyquit():
+    print("\n Then..")
+    time.sleep(1)
+    print("GET OUT! \n")
+    time.sleep(1)
+    sys.exit()      
+
 
 # Blueprint for different weapons.
 class Weapon:
@@ -76,7 +77,15 @@ class Bot:
 comp = Bot()
 
 sey = ["yes", "y"]
-han = ["n", "n"]
+han = ["no", "n"]
+
+def turnswap():
+    if user.x == True and comp.y == False:
+        user.x = False
+        comp.y = True
+    if user.x == False and comp.y == True:
+        user.x = True
+        comp.y = False
 
 def main():
     global selwep
@@ -117,7 +126,7 @@ def main():
                 #     print(options[userin].type)
                 #     break
         elif res in han:
-            Funnyquit()
+            funnyquit()
         else:
              print("Please return a valid answer between Yes or No.")
              #main()
@@ -128,7 +137,7 @@ def trigger():
     sh = 0
     while sh <= selwep.shells:
         if user.x == True and comp.y == False:
-            firc = input("Fire? \n Y/N:")
+            firc = input("Fire? \n Y/N:").lower().strip()
             if firc in sey:
                 hitc = random.randint(0, selwep.shells)
                 if hitc <= selwep.liveR:
@@ -137,25 +146,25 @@ def trigger():
                     print(user.name + " take " + str(selwep.damage) + " damage!")
                     user.health = (user.health - selwep.damage)
                     sh += 1
-                    user.x = False
-                    comp.y = True 
+                    turnswap() 
                     #Only runs at end of game
                     if user.health <= 0:
                         print(user.name + " have gone kablooey.\n ")
                         if input("Would you like to play again?\n Y/N") in sey:
-                            quit
                             main()
+                            return
                         elif input() in han:
-                         Funnyquit()
+                         funnyquit()
                         else:
                             print("Please reutrn a valid answer. \n")
                 
                 if hitc > selwep.liveR:
                     print("Nothing happened")
                     sh += 1
+                    turnswap()
             #Only runs if you decide not to fire
-            if firc in han:
-             Funnyquit()
+            elif firc in han:
+                funnyquit()
             else:
              print("Please return a valid response: \n")   
         else:
@@ -169,7 +178,7 @@ def trigger():
                          quit
                          main()
                      if input() in han:
-                         Funnyquit()
+                         funnyquit()
                  else:
                      if hitc <= selwep.liveR:
                          print("The " , selwep.type, "goes off") 
@@ -186,7 +195,7 @@ def trigger():
                                  quit
                                  main()
                              elif input() in han:
-                                 Funnyquit()                         
+                                 funnyquit()                         
                              else:
                                  print("Please reutrn a valid answer. \n")
     #Runs if all shells go off and no one wins
@@ -195,7 +204,7 @@ def trigger():
          quit
          main()
         elif input() in han:
-         Funnyquit()
+         funnyquit()
         else:
          print("Please reutrn a valid answer. \n")
 
