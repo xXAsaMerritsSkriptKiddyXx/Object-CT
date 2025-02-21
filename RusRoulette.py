@@ -6,6 +6,7 @@ def funnyquit():
     print("GET OUT! \n")
     time.sleep(1)
     sys.exit()      
+#Runs when game quits
 
 
 # Blueprint for different weapons.
@@ -74,10 +75,28 @@ class Bot:
         self.y = y
         self.qchance = qchance
 # x and y are used to iterate between whose turn it is.
-comp = Bot()
 
+comp = Bot()
 sey = ["yes", "y"]
 han = ["no", "n"]
+
+
+def fireweapon():
+ hitc = random.randint(0, selwep.shells)
+ if hitc <= selwep.liveR:
+     print("The " , selwep.type, "goes off") 
+     time.sleep(1) 
+     if user.x:
+         print(user.name + " take " + str(selwep.damage) + " damage!")
+         user.health = (user.health - selwep.damage)
+     else:
+         print(comp.bname + " takes " + str(selwep.damage) + " damage!")
+         comp.bhealth = (comp.bhealth - selwep.damage)
+ else: 
+    print("Nothing happened.")
+
+#Runs if weapon fires
+
 
 def turnswap():
     if user.x == True and comp.y == False:
@@ -136,15 +155,10 @@ def trigger():
     global hitc
     sh = 0
     while sh <= selwep.shells:
-        if user.x == True and comp.y == False:
+        if user.x and not comp.y:
             firc = input("Fire? \n Y/N:").lower().strip()
             if firc in sey:
-                hitc = random.randint(0, selwep.shells)
-                if hitc <= selwep.liveR:
-                    print("The " , selwep.type, "goes off") 
-                    time.sleep(1) 
-                    print(user.name + " take " + str(selwep.damage) + " damage!")
-                    user.health = (user.health - selwep.damage)
+                    fireweapon()
                     sh += 1
                     turnswap() 
                     #Only runs at end of game
@@ -157,11 +171,6 @@ def trigger():
                          funnyquit()
                         else:
                             print("Please reutrn a valid answer. \n")
-                
-                if hitc > selwep.liveR:
-                    print("Nothing happened")
-                    sh += 1
-                    turnswap()
             #Only runs if you decide not to fire
             elif firc in han:
                 funnyquit()
@@ -181,10 +190,7 @@ def trigger():
                          funnyquit()
                  else:
                      if hitc <= selwep.liveR:
-                         print("The " , selwep.type, "goes off") 
-                         time.sleep(1) 
-                         print(comp.bname + " takes " + str(selwep.damage) + " damage!")
-                         comp.bhealth = (comp.bhealth - selwep.damage)
+                         fireweapon() 
                          sh += 1
                          user.x = True
                          comp.y = False
