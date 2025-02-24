@@ -106,9 +106,11 @@ def turnswap():
     if user.x == True and comp.y == False:
         user.x = False
         comp.y = True
-    if user.x == False and comp.y == True:
+        print("It is now " + comp. bname + "'s turn!")
+    else:
         user.x = True
         comp.y = False
+        print("It is now your turn!")
 
 
 #Runs at the end of the game. Gives options to play again
@@ -177,12 +179,12 @@ def trigger():
             firc = input("Fire? \n Y/N:").lower().strip()
             if firc in sey:
                     fireweapon()
-                    sh += 1
-                    turnswap() 
+                    sh += 1 
                     #Only runs at end of game
                     if user.health <= 0:
                         print(user.name + " have gone kablooey.\n ")
                         playagain()
+                    turnswap()
             #Only runs if you decide not to fire
             elif firc in han:
                 funnyquit()
@@ -193,17 +195,17 @@ def trigger():
             while comp.y == True and user.x == False:
                  quitp = random.randint(0,20)
                  if quitp <= comp.qchance:
-                     print("Your opponent forefits! \n")
+                     print(comp.bname + " forefits! \n")
                      playagain()
                  else:
                      if hitc <= selwep.liveR:
                          fireweapon() 
                          sh += 1
-                         turnswap()
                          #Only runs at end of game
                          if comp.bhealth <= 0:
                              print(comp.bname + " has gone kablooey.\n ")
                              playagain()
+                         turnswap()
          #playagain()
 
 
