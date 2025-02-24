@@ -82,10 +82,14 @@ han = ["no", "n"]
 
 
 def fireweapon():
- hitc = random.randint(0, selwep.shells)
+ shotsfired = 0
+ hitc = random.randint(0, selwep.shells - shotsfired)
+ user.health = 100
+ comp.bhealth = 100
  if hitc <= selwep.liveR:
      print("The " , selwep.type, "goes off") 
      time.sleep(1) 
+     shotsfired += 1
      if user.x:
          print(user.name + " take " + str(selwep.damage) + " damage!")
          user.health = (user.health - selwep.damage)
@@ -97,7 +101,7 @@ def fireweapon():
 
 #Runs if weapon fires
 
-
+#Swaps turn between bot and human
 def turnswap():
     if user.x == True and comp.y == False:
         user.x = False
@@ -106,9 +110,23 @@ def turnswap():
         user.x = True
         comp.y = False
 
+
+#Runs at the end of the game. Gives options to play again
+def playagain():
+ if input("Would you like to play again?\n Y/N") in sey:
+     quit
+     main()
+ elif input() in han:
+     funnyquit()
+ else:
+     print("Please reutrn a valid answer. \n")
+
+
+#Game Start, weapon selection
 def main():
     global selwep
     s = 1
+    shotsfired = 0
     if s == 1:
         print("Hello. Welcome to Russian Roulette. Where your bravery will be put to the test.")
         time.sleep(1)
@@ -134,28 +152,28 @@ def main():
                         user.x = True
                         comp.y = False
                         trigger()
-                     else:
+                     elif input() in han:
                         comp.y = True
                         user.x = False
                         trigger()
+                     else:
+                        print("Please return a valid answer.") 
                      run = False
                 else:
                  print("Please return an integer from the allowed list!")
-                # if userin in options.keys():
-                #     print(options[userin].type)
-                #     break
         elif res in han:
             funnyquit()
         else:
              print("Please return a valid answer between Yes or No.")
-             #main()
 
 
+
+#Roulette functions
 def trigger():
     global hitc
     sh = 0
     while sh <= selwep.shells:
-        if user.x and not comp.y:
+        while user.x == True and comp.y == False:
             firc = input("Fire? \n Y/N:").lower().strip()
             if firc in sey:
                     fireweapon()
@@ -164,13 +182,7 @@ def trigger():
                     #Only runs at end of game
                     if user.health <= 0:
                         print(user.name + " have gone kablooey.\n ")
-                        if input("Would you like to play again?\n Y/N") in sey:
-                            main()
-                            return
-                        elif input() in han:
-                         funnyquit()
-                        else:
-                            print("Please reutrn a valid answer. \n")
+                        playagain()
             #Only runs if you decide not to fire
             elif firc in han:
                 funnyquit()
@@ -178,42 +190,21 @@ def trigger():
              print("Please return a valid response: \n")   
         else:
             #Bot coding
-            if comp.y == True and user.x == False:
+            while comp.y == True and user.x == False:
                  quitp = random.randint(0,20)
                  if quitp <= comp.qchance:
                      print("Your opponent forefits! \n")
-                     input("Would you like to play again?")
-                     if input() in sey:
-                         quit
-                         main()
-                     if input() in han:
-                         funnyquit()
+                     playagain()
                  else:
                      if hitc <= selwep.liveR:
                          fireweapon() 
                          sh += 1
-                         user.x = True
-                         comp.y = False
+                         turnswap()
                          #Only runs at end of game
                          if comp.bhealth <= 0:
                              print(comp.bname + " has gone kablooey.\n ")
-                             if input("Would you like to play again?\n Y/N") in sey:
-                                 quit
-                                 main()
-                             elif input() in han:
-                                 funnyquit()                         
-                             else:
-                                 print("Please reutrn a valid answer. \n")
-    #Runs if all shells go off and no one wins
-    if sh > selwep.shells:
-        if input("Would you like to play again?\n Y/N") in sey:
-         quit
-         main()
-        elif input() in han:
-         funnyquit()
-        else:
-         print("Please reutrn a valid answer. \n")
-
+                             playagain()
+         #playagain()
 
 
 if __name__ == "__main__":
