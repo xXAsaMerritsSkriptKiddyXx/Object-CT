@@ -112,6 +112,18 @@ def turnswap():
         comp.y = False
         print("It is now your turn!")
 
+def starter():
+    if input("Would you like to go first? \n") in sey:
+     user.x = True
+     comp.y = False
+     trigger()
+    elif input() in han:
+     comp.y = True
+     user.x = False
+     trigger()
+    else:
+     print("Please return a valid answer.") 
+
 
 #Runs at the end of the game. Gives options to play again
 def playagain():
@@ -145,22 +157,11 @@ def main():
                     print(i+1, weapon.name)
 
                 userin = input().strip().lower()
-              
 
                 if userin.isnumeric() and int(userin) <= len(weapons):
                      selwep = weapons[int(userin)-1]
                      print("\n You have chosen:" , selwep.type, "\n") 
-                     if input("Would you like to go first? \n") in sey:
-                        user.x = True
-                        comp.y = False
-                        trigger()
-                     elif input() in han:
-                        comp.y = True
-                        user.x = False
-                        trigger()
-                     else:
-                        print("Please return a valid answer.") 
-                     run = False
+                     starter()
                 else:
                  print("Please return an integer from the allowed list!")
         elif res in han:
