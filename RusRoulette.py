@@ -98,6 +98,7 @@ def fireweapon():
          comp.bhealth = (comp.bhealth - selwep.damage)
  else: 
     print("Nothing happened.")
+    time.sleep(1)
 
 #Runs if weapon fires
 
@@ -107,19 +108,22 @@ def turnswap():
         user.x = False
         comp.y = True
         print("It is now " + comp. bname + "'s turn!")
+        time.sleep(1)
     else:
         user.x = True
         comp.y = False
         print("It is now your turn!")
 
 def starter():
-    if input("Would you like to go first? \n") in sey:
+    que = input("Would you like to go first? \n")
+    if que in sey:
      user.x = True
      comp.y = False
      trigger()
-    elif input() in han:
+    elif que in han:
      comp.y = True
      user.x = False
+     print("It is now " + comp. bname + "'s turn!")
      trigger()
     else:
      print("Please return a valid answer.") 
@@ -127,10 +131,11 @@ def starter():
 
 #Runs at the end of the game. Gives options to play again
 def playagain():
- if input("Would you like to play again?\n Y/N") in sey:
+ pa = input("Would you like to play again?\n Y/N")
+ if pa in sey:
      quit
      main()
- elif input() in han:
+ elif pa in han:
      funnyquit()
  else:
      print("Please reutrn a valid answer. \n")
